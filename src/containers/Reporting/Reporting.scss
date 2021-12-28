@@ -1,0 +1,120 @@
+.chart-holder {
+  min-height: 300px;
+}
+
+
+.CalendarDay__selected {
+  background: #5648f6;
+  color: white;
+}
+.CalendarDay__selected_span {
+  background: #5648f69c;
+  color: white;
+}
+.CalendarDay__selected_span:hover {
+  background: #5648f6;
+  border: 1px double #5648f6;
+  color: white;
+}
+.CalendarDay__selected:hover {
+  background: #5648f69c;
+  color: white;
+}
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+  background: #5648f6;
+  border: 1px double #5648f6;
+  color: white;
+}
+.CalendarDay__highlighted_calendar {
+  background: #5648f69c;
+  border: 1px double #5648f69c;
+  color:white;
+}
+
+.recharts-cartesian-grid {
+  background: white;
+}
+.recharts-cartesian-grid-horizontal {
+  background: white;
+}
+
+.date-container {
+  display: flex;
+  align-items: center;
+  width: 280px;
+  @media screen and (min-width: 1350px) {
+    flex-direction: column;
+  }
+  &.date-error {
+    border: 1px solid red;
+  }
+  .custom-calender {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    align-items: center;
+    padding-bottom: 20px;
+    input {
+      max-width: 80px;
+      height: 35px;
+      border-color: #00000030;
+      border-width: 1px;
+      border-radius: 3px;
+      text-align: center;
+    }
+    p {
+      margin: 0;
+      font-size: 18px;
+      span {
+        font-weight: bold;
+      }
+    }
+    button {
+      min-width: 100px;
+      border: navajowhite;
+      background: #5648f6;
+      color: white;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  }
+  .DateRangePicker {
+    width: 280px;
+  }
+  .DateInput {
+    @media screen and (max-width: 600px) {
+      width: 93px;
+    }
+  }
+  .DateRangePickerInput__withBorder {
+    width: 280px;
+    border: 0;
+  }
+  .DateRangePickerInput {
+    display: flex;
+    align-items: center;
+  }
+  .DateInput_input {
+    padding: 7px 11px 7px 12px;
+  }
+  .DateRangePickerInput_arrow_svg {
+    @media screen and (max-width: 600px) {
+      width: 60px;
+    }
+  }
+  .DateRangePickerInput_arrow {
+    @media screen and (max-width: 600px) {
+      width: 50px;
+    }
+  }
+  input {
+    font-size: 1rem/* 16px */;
+    line-height: 1.5rem/* 24px */;
+    color: #374151;
+    font-weight: 500;
+    @media screen and (max-width: 600px) {
+      width: 120px;
+    }
+  }
+}

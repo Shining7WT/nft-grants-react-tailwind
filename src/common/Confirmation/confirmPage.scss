@@ -1,0 +1,65 @@
+.confirm-row-1 {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-top: 104px;
+
+  div {
+    display: flex;
+    justify-content: center;
+  }
+  p {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+.confirm-image-row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-top: 85px;
+  div {
+    display: flex;
+    justify-content: center;
+    .center-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 385px;
+      height: 289px;
+      border-radius: 95px;
+      background-image: url(../../img//particles.gif);
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+}
+.confirm-row-3 {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-top: 10px;
+  div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-top: 33px;
+    }
+  }
+}
+.confirm-row-4 {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  margin-top: 10px;
+  div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      font-style: normal;
+      margin-top: 15px;
+    }
+  }
+}

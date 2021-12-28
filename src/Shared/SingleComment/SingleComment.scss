@@ -1,0 +1,97 @@
+.single-comment {
+  display: flex;
+  margin-bottom: 30px;
+  width:100%;
+  &:last-child {
+    margin-bottom: 0px;
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    flex: none;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+
+  .details {
+    padding-left: 25px;
+    width:100%;
+    .name {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    #edit-comment-input {
+      width: 100%;
+      background: #F8F8F8;
+      border: 1px solid #E1E1E1;
+      box-sizing: border-box;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 23px;
+    }
+
+    .date-time {
+      color: #828282;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .comment-content {
+      font-size: 14px;
+      font-weight:400;
+    }
+    .comment-options{
+      font-size:14px;
+      width:100%;
+      div:first-child > span{
+        margin-right:25px;
+      }
+      span{
+        color: #707070;
+      }
+      .options-wording{
+        color: #A7A7A7;
+        margin-left:8px;
+        font-weight:400;
+      }
+      .edit-btn{
+        cursor:pointer;
+        &:hover{
+          .options-wording{
+            color: #5546FF;
+          }
+          color: #5546FF;
+        }
+        svg{margin-top: -3px;}
+      }
+      .delete-btn{
+        cursor:pointer;
+        &:hover{
+          .options-wording{
+            color: red;
+          }
+          color: red;
+        }
+        svg{margin-top: -3px;}
+      }
+      .editing-btn{
+        .options-wording{
+          color: #5546FF;
+        }
+        color: #5546FF;
+        svg{margin-top: -3px;}
+      }
+      .edited-details{
+        span{
+          &:first-child{color: #707070; margin-right:10px;}
+          &:last-child{color: #A7A7A7; font-style: italic;}
+        }
+      }
+    }
+  }
+}

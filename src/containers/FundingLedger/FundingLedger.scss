@@ -1,0 +1,30 @@
+.date-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  @media screen and (min-width: 1350px) {
+    flex-direction: column;
+  }
+  &.date-error {
+    border: 1px solid red;
+  }
+  .DateRangePicker {
+    width: 100%;
+  }
+  .DateRangePickerInput {
+    display: flex;
+    align-items: center;
+  }
+  .DateInput_input {
+    padding: 7px 11px 7px 12px;
+  }
+  .DateRangePickerInput__withBorder {
+    border: 0;
+  }
+  input {
+    font-size: 1rem/* 16px */;
+    line-height: 1.5rem/* 24px */;
+    color: #374151;
+    font-weight: 500;
+  }
+}
