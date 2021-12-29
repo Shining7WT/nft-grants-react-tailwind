@@ -66,10 +66,10 @@ const UserEdit = () => {
                         </div>
                     </div>
                 </div>
-                <div className="xl:flex mt-8 items-center xl:justify-between xl:space-x-3 mt-3 px-3">
+                <div className="xl:flex mt-8 items-center text-center md:text-left xl:justify-between xl:space-x-3 mt-3 px-3">
                     <div className="flex-none">
                         <div className="userInfo">
-                            <div className="userImg relative">
+                            <div className="userImg ml-auto mr-auto md:ml-0 md:mr-0 relative">
                                 <img src={UserImg} alt="User" />
                                 <a href="#" className="editBtn absolute bg-white">
                                     <img src={EditIcon} alt="Edit" />
@@ -163,7 +163,7 @@ const UserEdit = () => {
                                     placeholder="SPZTTWJ2DFJTQWV2THMY55W2ZVD7T7G9CCBNDCQ7"
                                     className="formControl rounded-lg placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                 />
-                                <div className="copyBtn absolute">
+                                <div className="copyBtn absolute px-2 md:px-0 bg-white md:bg-transparent">
                                     <a href="#" className="flex">
                                         <label className="text-stxblue font-medium text-sm pr-2">
                                             Copy
