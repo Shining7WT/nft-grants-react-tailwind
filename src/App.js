@@ -15,6 +15,8 @@ import PageNotFound from "./common/PageNotFound";
 import RequireAuthWithLayout from "./RequireAuthWithLayout";
 import RequireAuth from "./RequireAuth";
 
+import { MyAccount , UserEdit } from "./containers/UserProfile";
+
 const Login = React.lazy(() => import("./containers/Auth/Login"));
 const Dashboard = React.lazy(() => import("./containers/Dashboard"));
 const PaymentDue = React.lazy(() => import("./containers/PaymentDue"));
@@ -87,6 +89,8 @@ function App() {
             <Route path="/onboard" element={ <RequireAuth> <NewGrantForm /> </RequireAuth> } />
             <Route path="/olvis" element={ <RequireAuth> <GrantOverview /> </RequireAuth> } />
             <Route path="/confirmation" element={<ConfirmPage />} />
+            <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/user-edit" element={<UserEdit />} />
             <Route path="/error-page" element={<ErrorPage />} />
             <Route path="/no-grants" element={<NoGrant />} />
             <Route path="*" element={<RequireAuthWithLayout> <PageNotFound /> </RequireAuthWithLayout>} />
