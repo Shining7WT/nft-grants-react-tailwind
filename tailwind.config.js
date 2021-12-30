@@ -13,6 +13,9 @@ module.exports = {
         84: '350px',
         86: '365px'
       },
+      boxShadow:{
+        'btn': '0px 10px 30px rgb(0 0 0 / 20%)',
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",

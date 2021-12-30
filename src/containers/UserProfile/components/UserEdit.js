@@ -1,4 +1,4 @@
-import { React,Fragment, useState } from 'react'
+import { useRef,React,Fragment, useState } from 'react'
 import CopyIcon from '../../../img/copyicon.svg';
 import EditIcon from '../../../img/pencil.svg';
 import { Listbox, Transition } from '@headlessui/react'
@@ -54,6 +54,23 @@ function classNames(...classes) {
 }
 
 const UserEdit = () => {
+    const [image, setImage] = useState({ preview: "", raw: "" });
+    const [copySuccess, setCopySuccess] = useState('Copy');
+    const textAreaRef = useRef(null);
+    function copyToClipboard(e) {
+        textAreaRef.current.select();
+        document.execCommand('copy');
+        e.target.focus();
+        setCopySuccess('Copied!');
+    };
+    const handleChange = e => {
+        if (e.target.files.length) {
+        setImage({
+            preview: URL.createObjectURL(e.target.files[0]),
+            raw: e.target.files[0]
+        });
+        }
+    };
     const [selected, setSelected] = useState(role[3])
   return (
     <div className="myAccount">
@@ -61,7 +78,7 @@ const UserEdit = () => {
             <form>
                 <div className="xl:flex xl:justify-between xl:space-x-3 mt-3 px-3">
                     <div className="flex-1">
-                        <div className="lgTitle">
+                        <div className="lgTitle text-center md:text-left">
                             <h3 className="page-title font-medium">Edit User</h3>
                         </div>
                     </div>
@@ -69,11 +86,23 @@ const UserEdit = () => {
                 <div className="xl:flex mt-8 items-center text-center md:text-left xl:justify-between xl:space-x-3 mt-3 px-3">
                     <div className="flex-none">
                         <div className="userInfo">
-                            <div className="userImg ml-auto mr-auto md:ml-0 md:mr-0 relative">
-                                <img src={UserImg} alt="User" />
-                                <a href="#" className="editBtn absolute bg-white">
+                            <div className="w-20 h-20 bg-dropdownTextColor rounded-full ml-auto mr-auto md:ml-0 md:mr-0 relative">
+                                {image.preview ? (
+                                    <img src={image.preview} alt="dummy" className="w-20 h-20 rounded-full object-cover" />
+                                    ) : (
+                                    <>
+                                        <img src={UserImg} alt="dummy" className="w-20 h-20 rounded-full object-cover" />
+                                    </>
+                                )}
+                                <input
+                                    type="file"
+                                    id="upload-button"
+                                    style={{ display: "none" }}
+                                    onChange={handleChange}
+                                />
+                                <label htmlFor="upload-button" className="w-8 h-8 rounded-full flex items-center justify-center top-0 -right-2 shadow-btn absolute bg-white cursor-pointer">
                                     <img src={EditIcon} alt="Edit" />
-                                </a>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -81,7 +110,7 @@ const UserEdit = () => {
                         <div className="userInfo">                     
                             <div className="userInfoMain">
                                 <h3 className="text-lg text-darkGray font-bold">Jhondoe1</h3>
-                                <span className="text-stxblue text-sm">User</span>
+                                <span className="text-stxblue text-sm">Admin</span>
                             </div>
                         </div>
                     </div>
@@ -97,7 +126,7 @@ const UserEdit = () => {
                                     type="text"
                                     name="firstname"
                                     placeholder="Jhon"
-                                    className="formControl rounded-lg placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
+                                    className="formControl rounded-lg focus:outline-none placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                 />
                             </div>
                         </div>
@@ -112,7 +141,7 @@ const UserEdit = () => {
                                     type="text"
                                     name="firstname"
                                     placeholder="Doe"
-                                    className="formControl rounded-lg placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
+                                    className="formControl rounded-lg focus:outline-none placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                 />
                             </div>
                         </div>
@@ -129,7 +158,7 @@ const UserEdit = () => {
                                     type="text"
                                     name="firstname"
                                     placeholder="Jhondoe1"
-                                    className="formControl rounded-lg placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
+                                    className="formControl rounded-lg focus:outline-none placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                 />
                             </div>
                         </div>
@@ -144,7 +173,7 @@ const UserEdit = () => {
                                     type="text"
                                     name="email"
                                     placeholder="Jhon.doe@abc.com"
-                                    className="formControl rounded-lg placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
+                                    className="formControl rounded-lg focus:outline-none placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                 />
                             </div>
                         </div>
@@ -160,16 +189,17 @@ const UserEdit = () => {
                                 <input
                                     type="text"
                                     name="firstname"
+                                    ref={textAreaRef}
                                     placeholder="SPZTTWJ2DFJTQWV2THMY55W2ZVD7T7G9CCBNDCQ7"
-                                    className="formControl rounded-lg placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
+                                    className="formControl rounded-lg focus:outline-none placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                 />
-                                <div className="copyBtn absolute px-2 md:px-0 bg-white md:bg-transparent">
-                                    <a href="#" className="flex">
-                                        <label className="text-stxblue font-medium text-sm pr-2">
-                                            Copy
+                                <div className="top-1/2 right-4 transform -translate-y-1/2 absolute px-2 md:px-0 bg-white md:bg-transparent">
+                                    <button onClick={copyToClipboard} type="button" className="flex cursor-pointer">
+                                        <label className="text-stxblue cursor-pointer font-medium text-sm pr-2">
+                                            {copySuccess}
                                         </label>
                                         <img src={CopyIcon} alt="Copy" />
-                                    </a>                                
+                                    </button>                                
                                 </div>
                             </div>
                         </div>
