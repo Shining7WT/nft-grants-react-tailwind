@@ -158,7 +158,7 @@ const MyAccount = () => {
                     <div className="xl:flex mt-11 xl:justify-between md:space-x-3 px-3">
                         <div className="flex-1">
                             <div className="formGroup">
-                                <button type="submit" className="w-full heightSelect text-center rounded-lg py-3 px-5 bg-stxblue hover:bg-stxblue text-sm text-white font-semibold mb-7">                          
+                                <button type="submit" className="w-full h-14 text-center rounded-lg py-3 px-5 bg-stxblue hover:bg-stxblue text-sm text-white font-semibold mb-7">                          
                                     Save My Settings
                                 </button>
                             </div>

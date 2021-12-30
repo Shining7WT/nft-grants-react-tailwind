@@ -213,7 +213,7 @@ const UserEdit = () => {
                                     <>
                                     <label className="block text-sm text-lbGray">Assigned to</label>
                                     <div className="mt-3 relative">
-                                        <Listbox.Button className="relative w-full bg-white border border-dropdownTextColor heightSelect rounded-lg pl-4 pr-10 py-2 text-left cursor-default focus:outline-none focus:dropdownTextColor focus:dropdownTextColor focus:dropdownTextColor sm:text-sm">
+                                        <Listbox.Button className="relative w-full bg-white border border-dropdownTextColor h-14 rounded-lg pl-4 pr-10 py-2 text-left cursor-default focus:outline-none focus:dropdownTextColor focus:dropdownTextColor focus:dropdownTextColor sm:text-sm">
                                         <span className="flex items-center">
                                             <span className="block truncate">{selected.name}</span>
                                         </span>
@@ -299,8 +299,8 @@ const UserEdit = () => {
                 </div>
                 <div className="xl:flex mt-11 xl:justify-between xl:space-x-3 px-3">
                     <div className="flex-1">
-                        <div className="formGroup">
-                            <button type="submit" className="w-full heightSelect text-center rounded-lg py-3 px-5 bg-stxblue hover:bg-stxblue text-sm text-white font-semibold mb-7">                          
+                        <div className="formGroup"> 
+                            <button type="submit" className="w-full h-14 text-center rounded-lg py-3 px-5 bg-stxblue hover:bg-stxblue text-sm text-white font-semibold mb-7">                          
                                 Update User
                             </button>
                         </div>
