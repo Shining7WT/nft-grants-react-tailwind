@@ -1,7 +1,9 @@
 import { useRef,React,Fragment, useState } from 'react'
 import CopyIcon from '../../../img/copyicon.svg';
 import EditIcon from '../../../img/pencil.svg';
-import { Listbox, Transition } from '@headlessui/react'
+import { Dialog ,Listbox, Transition } from '@headlessui/react';
+import Cropper from "react-cropper";
+import "cropperjs/dist/cropper.css";
 import UserImg from '../../../img/userimg.jpg';
 import CheckRadio from '../../../img/checkradio.svg';
 import UnCheckRadio from '../../../img/uncheckradio.svg';
@@ -54,7 +56,11 @@ function classNames(...classes) {
 }
 
 const UserEdit = () => {
-    const [image, setImage] = useState({ preview: "", raw: "" });
+    const [image, setImage] = useState(UserImg);
+    const [cropData, setCropData] = useState(image);
+    const [open, setOpen] = useState(false);
+    const cancelButtonRef = useRef(null);
+    const [cropper, setCropper] = useState();
     const [copySuccess, setCopySuccess] = useState('Copy');
     const textAreaRef = useRef(null);
     function copyToClipboard(e) {
@@ -63,12 +69,24 @@ const UserEdit = () => {
         e.target.focus();
         setCopySuccess('Copied!');
     };
-    const handleChange = e => {
-        if (e.target.files.length) {
-        setImage({
-            preview: URL.createObjectURL(e.target.files[0]),
-            raw: e.target.files[0]
-        });
+    const onChange = (e) => {
+        e.preventDefault();
+        let files;
+        setOpen(true);
+        if (e.dataTransfer) {
+          files = e.dataTransfer.files;          
+        } else if (e.target) {
+          files = e.target.files;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImage(reader.result);
+        };
+        reader.readAsDataURL(files[0]);        
+    };
+    const getCropData = () => {
+        if (typeof cropper !== "undefined") {
+          setCropData(cropper.getCroppedCanvas().toDataURL());
         }
     };
     const [selected, setSelected] = useState(role[3])
@@ -87,18 +105,18 @@ const UserEdit = () => {
                     <div className="flex-none">
                         <div className="userInfo">
                             <div className="w-20 h-20 bg-dropdownTextColor rounded-full ml-auto mr-auto md:ml-0 md:mr-0 relative">
-                                {image.preview ? (
-                                    <img src={image.preview} alt="dummy" className="w-20 h-20 rounded-full object-cover" />
+                                {(typeof cropper !== "undefined") ? (
+                                    <img src={cropData} alt="dummy" className="w-20 h-20 rounded-full object-cover" />
                                     ) : (
                                     <>
-                                        <img src={UserImg} alt="dummy" className="w-20 h-20 rounded-full object-cover" />
+                                        <img src={image} alt="dummy" className="w-20 h-20 rounded-full object-cover" />
                                     </>
-                                )}
+                                )}   
                                 <input
                                     type="file"
                                     id="upload-button"
                                     style={{ display: "none" }}
-                                    onChange={handleChange}
+                                    onChange={onChange}
                                 />
                                 <label htmlFor="upload-button" className="w-8 h-8 rounded-full flex items-center justify-center top-0 -right-2 shadow-btn absolute bg-white cursor-pointer">
                                     <img src={EditIcon} alt="Edit" />
@@ -308,6 +326,75 @@ const UserEdit = () => {
                 </div>    
             </form>        
         </div>
+        <Transition.Root show={open} as={Fragment}>
+            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef} onClose={setOpen}>
+                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                </Transition.Child>
+                <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
+                    &#8203;
+                </span>
+                <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                    enterTo="opacity-100 translate-y-0 sm:scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                >
+                    <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <Cropper
+                            style={{ height: 400, width: "100%" }}
+                            zoomTo={0.5}
+                            initialAspectRatio={1}
+                            preview=".img-preview"
+                            src={image}
+                            viewMode={1}
+                            minCropBoxHeight={10}
+                            minCropBoxWidth={10}
+                            background={false}
+                            responsive={true}
+                            autoCropArea={1}
+                            checkOrientation={false} 
+                            onInitialized={(instance) => {
+                                setCropper(instance);
+                            }}
+                            guides={true}
+                        />
+                    </div>
+                    <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button
+                        type="button"
+                        className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-stxblue text-base font-medium text-white hover:bg-stxblue focus:outline-none focus:ring-stxblue focus:ring-stxblue focus:ring-stxblue sm:ml-3 sm:w-auto sm:text-sm"                            
+                        onClick={getCropData}
+                        >
+                            Crop
+                        </button>
+                        <button
+                        type="button"
+                        className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-gray-300 focus:ring-gray-300 focus:ring-gray-300 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        onClick={() => setOpen(false)}
+                        ref={cancelButtonRef}
+                        >
+                            Close
+                        </button>
+                    </div>
+                    </div>
+                </Transition.Child>
+                </div>
+            </Dialog>
+        </Transition.Root>
     </div>
   );
 };
