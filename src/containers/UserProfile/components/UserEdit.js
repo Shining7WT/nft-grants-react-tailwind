@@ -90,6 +90,7 @@ const UserEdit = () => {
     const getCropData = () => {
         if (typeof cropper !== "undefined") {
           setCropData(cropper.getCroppedCanvas().toDataURL());
+          setOpen(false);   
         }
     };
     const [selected, setSelected] = useState(role[3])
