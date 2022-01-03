@@ -23,22 +23,26 @@ const MyAccount = () => {
 
     const onChange = (e) => {
         e.preventDefault();
-        let files;
-        setOpen(true);
+        let files;        
         if (e.dataTransfer) {
-          files = e.dataTransfer.files;          
+          files = e.dataTransfer.files;     
+          setOpen(true);    
         } else if (e.target) {
           files = e.target.files;
+          setOpen(true);
         }
         const reader = new FileReader();
         reader.onload = () => {
-          setImage(reader.result);
+          setImage(reader.result);          
         };
-        reader.readAsDataURL(files[0]);        
+        if (e.target.files[0]) {
+            reader.readAsDataURL(files[0]);  
+        }           
     };
     const getCropData = () => {
         if (typeof cropper !== "undefined") {
-          setCropData(cropper.getCroppedCanvas().toDataURL());          
+          setCropData(cropper.getCroppedCanvas().toDataURL());      
+          setOpen(false);    
         }
     };
 
