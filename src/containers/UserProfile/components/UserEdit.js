@@ -71,13 +71,10 @@ const UserEdit = () => {
     };
     const onChange = (e) => {
         e.preventDefault();
-        let files;        
-        if (e.dataTransfer) {
-          files = e.dataTransfer.files;     
-          setOpen(true);    
-        } else if (e.target) {
-          files = e.target.files;
-          setOpen(true);
+        let files;    
+        if (e.target) {
+          files = e.target.files;    
+          setOpen(true);  
         }
         const reader = new FileReader();
         reader.onload = () => {
@@ -85,7 +82,7 @@ const UserEdit = () => {
         };
         if (e.target.files[0]) {
             reader.readAsDataURL(files[0]);  
-        }           
+        }        
     };
     const getCropData = () => {
         if (typeof cropper !== "undefined") {
@@ -121,6 +118,9 @@ const UserEdit = () => {
                                     id="upload-button"
                                     style={{ display: "none" }}
                                     onChange={onChange}
+                                    onClick={(event)=> {
+                                        event.target.value = null
+                                    }}
                                 />
                                 <label htmlFor="upload-button" className="w-8 h-8 rounded-full flex items-center justify-center top-0 -right-2 shadow-btn absolute bg-white cursor-pointer">
                                     <img src={EditIcon} alt="Edit" />
