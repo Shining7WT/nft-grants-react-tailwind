@@ -12,6 +12,7 @@ const MyAccount = () => {
     const [open, setOpen] = useState(false);
     const cancelButtonRef = useRef(null);
     const [image, setImage] = useState(UserImg);
+    const [walletValue, setWalletValue] = useState('SPZTTWJ2DFJTQWV2THMY55W2ZVD7T7G9CCBNDCQ7');
     const [cropData, setCropData] = useState(image);
     const [cropper, setCropper] = useState();
     function copyToClipboard(e) {
@@ -164,6 +165,8 @@ const MyAccount = () => {
                                         type="text"
                                         name="firstname"
                                         ref={textAreaRef}
+                                        defaultValue={walletValue}
+                                        readOnly = {true}
                                         placeholder="SPZTTWJ2DFJTQWV2THMY55W2ZVD7T7G9CCBNDCQ7"
                                         className="formControl rounded-lg focus:outline-none placeholder-darkGray focus:dropdownTextColor text-sm p-4 block w-full border border-dropdownTextColor"
                                     />
